@@ -19,7 +19,7 @@ function useKeyPress(callback) {
             window.removeEventListener('keyup', upHandler);
         };
         //eslint-disable-next-line
-    }, []);
+    });
     return keyPressed;
 }
 

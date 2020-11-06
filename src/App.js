@@ -2,7 +2,9 @@ import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { words } from './utils/words';
+import { currentTime } from './utils/time';
 import useKeyPress from './hooks/useKeyPress';
+
 const initialWords = words();
 
 function App() {
@@ -10,9 +12,17 @@ function App() {
   const [outgoingChars, setOutgoingChars] = useState('');
   const [currentChar, setCurrentChar] = useState(initialWords.charAt(0));
   const [incomingChars, setIncomingChars] = useState(initialWords.substr(1));
+
+  const [startTime, setStartTime] = useState();
+  const [wordCount, setWordCount] = useState(0);
+  const [wpm, setWpm] = useState(0);
+
   useKeyPress(key => {
     let updatedOutgoingChars = outgoingChars;
     let updatedIncomingChars = incomingChars;
+    if (!startTime) {
+      setStartTime(currentTime());
+    }
     if (key === currentChar) {
       if (leftPadding.length > 0) {
         setLeftPadding(leftPadding.substring(1));
@@ -25,6 +35,11 @@ function App() {
         updatedIncomingChars += ' ' + words();
       }
       setIncomingChars(updatedIncomingChars);
+      if (incomingChars.charAt(0) === ' ') {
+        setWordCount(wordCount + 1);
+        const durationInMinutes = (currentTime() - startTime) / 6000.0;
+        setWpm(((wordCount + 1) / durationInMinutes).toFixed(2));
+      }
     }
   });
   return (
@@ -38,6 +53,7 @@ function App() {
           <span className="Character-current">{currentChar}</span>
           <span>{incomingChars.substr(0, 20)}</span>
         </p>
+        <h3>WPM: {wpm}</h3>
       </header>
     </div>
   );

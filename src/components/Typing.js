@@ -46,7 +46,7 @@ function Typing() {
         setAccuracy(((updatedOutgoingChars.length * 100) / updatedTypedChars.length).toFixed(2));
     });
 
-    const [minutes, setMinutes] = useState(0);
+    const [minutes, setMinutes] = useState(1);
     const [seconds, setSeconds] = useState(0);
     useEffect(() => {
         const interval = setInterval(() => {

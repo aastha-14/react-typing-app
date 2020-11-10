@@ -2,10 +2,7 @@ import './App.css';
 import './bootstrap.min.css';
 import { useState } from 'react';
 import Typing from './components/Typing';
-// import VirtualKeyboard from 'react-virtual-keyboard';
-import Keyboard from 'react-simple-keyboard';
-import 'react-simple-keyboard/build/css/index.css';
-import Keyboard1 from './components/Keyboard';
+import Keyboard from './components/Keyboard';
 function App() {
   const [typing, setTyping] = useState(false);
   const [virtual, setVirtual] = useState(false);
@@ -24,7 +21,7 @@ function App() {
               () => { setVirtual(true); setDisplay(false); }
             }>Use Virtual Keyboard</button></> : <></>}
         {
-          virtual && <><Keyboard1 /> </>
+          virtual && <><Keyboard /> </>
         }
       </header>
     </div>

@@ -22,7 +22,6 @@ function Keyboard11() {
     const [accuracy, setAccuracy] = useState(0);
     const [typedChars, setTypedChars] = useState('');
 
-    let keyboard = "";
     const onKeyPress = key => {
         if (key === "{shift}" || key === "{lock}") handleShift();
         let updatedOutgoingChars = outgoingChars;

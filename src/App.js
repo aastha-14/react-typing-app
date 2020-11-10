@@ -41,7 +41,7 @@ function App() {
                   </button>
                 <button
                   type="button"
-                  className='btn btn-danger disabled btn-lg'
+                  className='btn btn-info disabled btn-lg'
                   onClick={
                     () => {
                       setVirtual(true);
@@ -58,7 +58,7 @@ function App() {
             <Keyboard />
             <button
               type="button"
-              className='btn btn-danger disabled btn-lg'
+              className='btn btn-info disabled btn-lg'
               onClick={
                 () => {
                   setVirtual(false);

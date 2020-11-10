@@ -96,7 +96,7 @@ function Keyboard11() {
                         <span className="Character-out">
                             {(leftPadding + outgoingChars).slice(-20)}
                         </span>
-                        <span className="btn-danger disabled">{currentChar}</span>
+                        <span className="btn-info disabled">{currentChar}</span>
                         <span>{incomingChars.substr(0, 20)}</span>
                     </p>
                     <Keyboard

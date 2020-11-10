@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import Keyboard from "react-simple-keyboard";
+import "react-simple-keyboard/build/css/index.css";
+import "../App.css";
 import { currentTime } from '../utils/time';
-import useKeyPress from '../hooks/useKeyPress';
 import { words } from '../utils/words';
+
 const initialWords = words();
 
-function Typing() {
+function Keyboard11() {
+    const [layoutName, setLayoutName] = useState("default");
+
     const [leftPadding, setLeftPadding] = useState(new Array(20).fill(' ').join(''));
     const [outgoingChars, setOutgoingChars] = useState('');
     const [currentChar, setCurrentChar] = useState(initialWords.charAt(0));
@@ -17,13 +22,15 @@ function Typing() {
     const [accuracy, setAccuracy] = useState(0);
     const [typedChars, setTypedChars] = useState('');
 
-    useKeyPress(key => {
+    let keyboard = "";
+    const onKeyPress = key => {
+        if (key === "{shift}" || key === "{lock}") handleShift();
         let updatedOutgoingChars = outgoingChars;
         let updatedIncomingChars = incomingChars;
         if (!startTime) {
             setStartTime(currentTime());
         }
-        if (key === currentChar) {
+        if (key === currentChar || (key === "{space}" && currentChar === " ")) {
             if (leftPadding.length > 0) {
                 setLeftPadding(leftPadding.substring(1));
             }
@@ -44,8 +51,10 @@ function Typing() {
         const updatedTypedChars = typedChars + key;
         setTypedChars(updatedTypedChars);
         setAccuracy(((updatedOutgoingChars.length * 100) / updatedTypedChars.length).toFixed(2));
-    });
-
+    };
+    const handleShift = () => {
+        setLayoutName(layoutName === "default" ? "shift" : "default");
+    };
     const [minutes, setMinutes] = useState(1);
     const [seconds, setSeconds] = useState(0);
     useEffect(() => {
@@ -84,6 +93,11 @@ function Typing() {
                         <span className="btn-danger disabled">{currentChar}</span>
                         <span>{incomingChars.substr(0, 20)}</span>
                     </p>
+                    <Keyboard
+                        theme={"hg-theme-default myTheme1"}
+                        layoutName={layoutName}
+                        onKeyPress={button => onKeyPress(button)}
+                    />
                     <h2>WPM: {wpm} | Accuracy: {accuracy}%</h2>
                 </>
             }
@@ -91,5 +105,4 @@ function Typing() {
         </div>
     );
 }
-
-export default Typing;
+export default Keyboard11;

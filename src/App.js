@@ -12,16 +12,61 @@ function App() {
       <h1>Typing Insanity</h1>
       <header className="App-header">
         {typing
-          ? <><Typing /></>
-          : display ? <>
-            <button className='btn btn-danger disabled btn-lg' onClick={
-              () => { setTyping(true); setDisplay(false); }
-            }>Start</button>
-            <button className='btn btn-danger disabled btn-lg' onClick={
-              () => { setVirtual(true); setDisplay(false); }
-            }>Use Virtual Keyboard</button></> : <></>}
+          ? <>
+            <Typing />
+            <button
+              type="button"
+              className='btn btn-danger disabled btn-lg'
+              onClick={
+                () => {
+                  setTyping(false);
+                  setDisplay(true);
+                }
+              }>Return
+              </button>
+          </>
+          : display
+            ? <>
+              <h3>Test your typing speed now!</h3>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className='btn btn-danger disabled btn-lg'
+                  onClick={
+                    () => {
+                      setTyping(true);
+                      setDisplay(false);
+                    }
+                  }>Start
+                  </button>
+                <button
+                  type="button"
+                  className='btn btn-danger disabled btn-lg'
+                  onClick={
+                    () => {
+                      setVirtual(true);
+                      setDisplay(false);
+                    }
+                  }>Use Virtual Keyboard
+                </button>
+              </div>
+            </>
+            : <></>}
         {
-          virtual && <><Keyboard /> </>
+          virtual
+          && <>
+            <Keyboard />
+            <button
+              type="button"
+              className='btn btn-danger disabled btn-lg'
+              onClick={
+                () => {
+                  setVirtual(false);
+                  setDisplay(true);
+                }
+              }>Return
+              </button>
+          </>
         }
       </header>
     </div>

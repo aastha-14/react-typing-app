@@ -29,7 +29,7 @@ function Keyboard11() {
         if (!startTime) {
             setStartTime(currentTime());
         }
-        if (key === currentChar || (key === "{space}" && currentChar === " ")) {
+        if (key === currentChar || (currentChar === " " && key === "{space}")) {
             if (leftPadding.length > 0) {
                 setLeftPadding(leftPadding.substring(1));
             }
@@ -47,9 +47,16 @@ function Keyboard11() {
                 setWpm(((wordCount + 1) / durationInMinutes).toFixed(2));
             }
         }
-        const updatedTypedChars = typedChars + key;
-        setTypedChars(updatedTypedChars);
-        setAccuracy(((updatedOutgoingChars.length * 100) / updatedTypedChars.length).toFixed(2));
+        if (key !== "{shift}" && key !== "{lock}") {
+            let updatedTypedChars;
+            if (key === "{space}") {
+                updatedTypedChars = typedChars + 'a';
+            } else {
+                updatedTypedChars = typedChars + key;
+            }
+            setTypedChars(updatedTypedChars);
+            setAccuracy(((updatedOutgoingChars.length * 100) / updatedTypedChars.length).toFixed(2));
+        }
     };
     const handleShift = () => {
         setLayoutName(layoutName === "default" ? "shift" : "default");

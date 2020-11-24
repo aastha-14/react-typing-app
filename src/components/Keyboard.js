@@ -43,9 +43,9 @@ function Keyboard11() {
             setIncomingChars(updatedIncomingChars);
             if (incomingChars.charAt(0) === ' ') {
                 setWordCount(wordCount + 1);
-                const durationInMinutes = (currentTime() - startTime) / 6000.0;
-                setWpm(((wordCount + 1) / durationInMinutes).toFixed(2));
+                // const durationInMinutes = (currentTime() - startTime) / 6000.0;
             }
+            setWpm(((wordCount / 5) / 1).toFixed(2));
         }
         if (key !== "{shift}" && key !== "{lock}") {
             let updatedTypedChars;

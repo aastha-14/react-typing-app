@@ -15,7 +15,7 @@ function App() {
           ? <>
             <Typing />
             <button
-              type="button"
+              type="button" 
               className='btn btn-danger disabled btn-lg'
               onClick={
                 () => {
